@@ -1,0 +1,20 @@
+// Matt L'Ecuyer 260454319
+
+package assignment1;
+
+public class Bladesworn extends Warrior{
+	
+	public static double BASE_HEALTH;
+	public static int BASE_COST;
+	public static int WEAPON_TYPE = 3;
+	public static int BASE_ATTACK_DAMAGE;
+
+	public Bladesworn(Tile t) {
+		super(t,BASE_HEALTH, WEAPON_TYPE, BASE_ATTACK_DAMAGE ,BASE_COST);
+	}
+
+
+	void main(String[] Args) {
+	}
+
+}
