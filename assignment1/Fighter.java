@@ -14,6 +14,10 @@ abstract public class Fighter{
 		health = hp;
 		weaponType = wp;
 	}
+
+	public String toString(){
+		return "Health = " + health;
+	}
 	
 	// strangely wont compile without this
 	//public Fighter(){

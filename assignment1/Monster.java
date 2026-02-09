@@ -7,6 +7,10 @@ public class Monster extends Fighter{
 
 	}
 
+//	public String toString(){
+//		return super.toString();
+//	}
+
 	public Monster(Tile t, double hp, int wp, int ad) {
 		super(t,hp,wp,ad);	
 	}
