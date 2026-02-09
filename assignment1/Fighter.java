@@ -23,23 +23,23 @@ abstract public class Fighter{
 	//public Fighter(){
 	//}
 
-	final private Tile getPosition() {
+	final public Tile getPosition() {
 		return position;
 	}
 
-	final private double getHealth(){
+	final public double getHealth(){
 		return health;
 	}
 
-	final private int getWeaponType(){
+	final public int getWeaponType(){
 		return weaponType;
 	}
 
-	final private int getAttackDamage(){
+	final public int getAttackDamage(){
 		return attackDamage;
 	}
 
-	private void setPosition(Tile t) {
+	public void setPosition(Tile t) {
 		position = t;
 	}
 	

@@ -97,6 +97,18 @@ public class MonsterTroop {
 		
 
 	}
+
+	static public Monster[] flipList(MonsterTroop t){
+		Monster[] arr = new Monster[t.numOfMonsters];
+		
+		int j = t.numOfMonsters -1;
+		for(int i = 0; i<t.numOfMonsters; i++) {
+			arr[i] = t.monsters[j];
+			j--;
+		}
+
+		return arr;
+	}
 	
 	void main(String[] Args) {
 		MonsterTroop mt = new MonsterTroop();
@@ -121,6 +133,11 @@ public class MonsterTroop {
 		System.out.println("Size is " + mt.sizeOfTroop());
 		System.out.println(mt);
 		System.out.println("Change? " +change);
+		
+		Monster[] flip = flipList(mt);
+		for (int i=0; i<flip.length; i++){
+			System.out.println(flip[i]);
+		}
 	
 
 	}
