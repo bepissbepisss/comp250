@@ -115,13 +115,16 @@ public class Tile{
 	}
 
 	public boolean removeFighter(Fighter f) {
+		System.out.println("Trying to remove fighter");
 		if (f instanceof Warrior && warrior != null) {
 			warrior.setPosition(null);
 			warrior = null;
 			return true;
 		}
 		if (f instanceof Monster && troop.sizeOfTroop() != 0) {
+			System.out.println("Removinga a monster");
 			troop.getFirstMonster().setPosition(null);
+			System.out.println("set its pos to null");
 			troop.removeMonster(troop.getFirstMonster());
 			System.out.println("Removed Monster");
 			return true;

@@ -14,6 +14,7 @@ abstract public class Fighter{
 		health = hp;
 		weaponType = wp;
 		attackDamage = ad;
+		position.addFighter(this);
 	}
 
 

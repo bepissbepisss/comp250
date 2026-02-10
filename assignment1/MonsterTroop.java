@@ -68,16 +68,19 @@ public class MonsterTroop {
 		for(int i=0;i < numOfMonsters; i++) {
 			if (monsters[i] == m) {
 				index = i;
-//				System.out.println("Found match at index " + index);
+				System.out.println("Found match at index " + index);
 				break;
 			}
 		}
 
 		if (index ==-1) {
+			System.out.println("Nothing to remove");
 			return false;
 		}
 
+		System.out.println("number of monsters went from " + numOfMonsters);
 		numOfMonsters--;
+		System.out.println("To " + numOfMonsters);
 		Monster[] arr = new Monster[numOfMonsters];
 		for (int i = 0; i<index;i++){
 			arr[i] = monsters[i];
@@ -89,7 +92,8 @@ public class MonsterTroop {
 			arr[i] = monsters[i+1];
 //			System.out.println("Just added " + arr[i]);
 		}
-
+		
+		System.out.println("Updated list");
 		monsters = arr;
 
 		return true;
@@ -117,19 +121,21 @@ public class MonsterTroop {
 		Bladesworn b = null;
 		MonsterTroop mt = new MonsterTroop();
 
+
 		Tile t = new Tile(false,false,true, tCastle, tCamp, b, mt);
 		b = new Bladesworn(t);
 		Axebringer a = new Axebringer(t);
 
 		Monster m = new Monster(t, 1,11,10);
 
-		mt.addMonster(m);
+		System.out.println("Size of troop is " + mt.numOfMonsters);
+
 		System.out.println(m);
 		b.takeAction();
-		System.out.println(b.getPosition());
+		System.out.println("Size of troop is " + mt.numOfMonsters);
 		// should kill monster then move to next tile
 		b.takeAction();
-		System.out.println(b.getPosition());
+//		System.out.println(b.getPosition());
 		// actually moved to next tile
 	}
 
