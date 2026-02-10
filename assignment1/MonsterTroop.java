@@ -119,6 +119,7 @@ public class MonsterTroop {
 
 		Tile t = new Tile(false,false,true, tCastle, tCamp, b, mt);
 		b = new Bladesworn(t);
+		Axebringer a = new Axebringer(t);
 
 		Monster m = new Monster(t, 1,11,10);
 

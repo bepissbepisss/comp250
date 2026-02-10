@@ -19,5 +19,18 @@ public class Axebringer extends Warrior {
 		System.out.println("hello");
 	}
 
+	public int takeAction(){
+		Tile currentTile = this.getPosition();
+		Tile nextTile = currentTile.towardTheCamp();
+		if (currentTile.getNumOfMonsters() != 0) {
+			currentTile.getMonster().takeDamage(this.getAttackDamage(), this.getWeaponType());
+		} else if (nextTile.getNumOfMonsters() != 0 && nextTile.isCamp() == false) {
+			nextTile.getMonster().takeDamage(this.getAttackDamage(), this.getWeaponType());
+		}
+
+		return 0;
+
+	}
+
 }
 
