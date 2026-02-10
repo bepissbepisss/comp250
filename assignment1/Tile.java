@@ -85,6 +85,7 @@ public class Tile{
 	}
 
 	public int getNumOfMonsters(){
+		if (troop == null) return 0;
 		return troop.sizeOfTroop();
 	}
 
