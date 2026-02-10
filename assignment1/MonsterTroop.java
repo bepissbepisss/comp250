@@ -113,8 +113,8 @@ public class MonsterTroop {
 	void main(String[] Args) {
 		MonsterTroop mt = new MonsterTroop();
 		Tile t = new Tile();
-		Monster m = new Monster(t, 10,10,10);
-		Monster n = new Monster(t, 11,1,1);
+		Monster m = new Monster(t, 11.002,10,10);
+		Monster n = new Monster(t, 11,10,10);
 		Monster s = new Monster(t, 12,1,1);
 		Monster a = new Monster(t, 11,10,10);
 
@@ -138,7 +138,11 @@ public class MonsterTroop {
 		for (int i=0; i<flip.length; i++){
 			System.out.println(flip[i]);
 		}
-	
+
+		System.out.println("are they the same? " + m.equals(n));
+
+		n.takeDamage(100,1);
+		System.out.println(mt);
 
 	}
 

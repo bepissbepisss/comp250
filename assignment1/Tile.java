@@ -15,8 +15,8 @@ public class Tile{
 	private Tile towardTheCastle;
 	private Tile towardTheCamp;
 
-	Warrior warrior;
-	MonsterTroop troop;
+	private Warrior warrior;
+	private MonsterTroop troop;
 
 	public Tile(){
 		isCastle = false;
