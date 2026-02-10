@@ -111,40 +111,25 @@ public class MonsterTroop {
 	}
 	
 	void main(String[] Args) {
+		Tile tCastle = new Tile();
+		Tile tCamp = new Tile(false,false,true,null,null,null,null);
+
+		Bladesworn b = null;
 		MonsterTroop mt = new MonsterTroop();
-		Tile t = new Tile();
-		Monster m = new Monster(t, 11.001,11,10);
-		Monster n = new Monster(t, 11,10,10);
-		Monster s = new Monster(t, 12,1,1);
-		Monster a = new Monster(t, 11,10,10);
+
+		Tile t = new Tile(false,false,true, tCastle, tCamp, b, mt);
+		b = new Bladesworn(t);
+
+		Monster m = new Monster(t, 1,11,10);
 
 		mt.addMonster(m);
-		mt.addMonster(n);
-		mt.addMonster(s);
-		mt.addMonster(n);
-		mt.addMonster(s);
-
-		System.out.println("Size is " + mt.sizeOfTroop());
-		System.out.println(mt);
-
-		boolean change;
-		change = mt.removeMonster(n);
-//	
-//		System.out.println("Size is " + mt.sizeOfTroop());
-//		System.out.println(mt);
-//		System.out.println("Change? " +change);
-//		
-//		Monster[] flip = flipList(mt);
-//		for (int i=0; i<flip.length; i++){
-//			System.out.println(flip[i]);
-//		}
-//
-		Warrior w = new Warrior(t,11.001,11,10,1);
-		System.out.println("are they the same? " + m.equals(n));
-//
-//		n.takeDamage(100,1);
-//		System.out.println(mt);
-
+		System.out.println(m);
+		b.takeAction();
+		System.out.println(b.getPosition());
+		// should kill monster then move to next tile
+		b.takeAction();
+		System.out.println(b.getPosition());
+		// actually moved to next tile
 	}
 
 

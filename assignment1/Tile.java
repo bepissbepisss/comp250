@@ -34,6 +34,8 @@ public class Tile{
 		onThePath = path;
 		towardTheCastle = toCastle;
 		towardTheCamp = toCamp;
+		warrior = w;
+		troop = t;
 	}
 
 	public boolean isCastle() {
@@ -52,20 +54,20 @@ public class Tile{
 		isCamp = true;
 	}
 
-	public boolean isOnPath(){
+	public boolean isOnThePath(){
 		return onThePath;
 	}
 
 	// not sure about these two
 	public Tile towardTheCastle(){
-		if (towardTheCastle.isOnPath() == false || towardTheCastle.isCastle() == true) {
+		if (towardTheCastle.isOnThePath() == false || towardTheCastle.isCastle() == true) {
 			return null;
 		}
 		return towardTheCastle;
 	}
 
 	public Tile towardTheCamp(){
-		if (towardTheCamp.isOnPath() == false || towardTheCamp.isCamp() == true) {
+		if (towardTheCamp.isOnThePath() == false || towardTheCamp.isCamp() == true) {
 			return null;
 		}
 		return towardTheCamp;
@@ -121,6 +123,7 @@ public class Tile{
 		if (f instanceof Monster && troop.sizeOfTroop() != 0) {
 			troop.getFirstMonster().setPosition(null);
 			troop.removeMonster(troop.getFirstMonster());
+			System.out.println("Removed Monster");
 			return true;
 		}
 		return false;

@@ -13,6 +13,7 @@ abstract public class Fighter{
 		position = t;
 		health = hp;
 		weaponType = wp;
+		attackDamage = ad;
 	}
 
 
@@ -65,10 +66,13 @@ abstract public class Fighter{
 		} else {
 			damage = raw;
 		}
-
+		System.out.println("Damage is " + damage);
+		System.out.println("Hp went from " + this.health);
 		this.health -= damage;
+		System.out.println("To " + this.health);
 
 		if (this.health <= 0) {
+			System.out.println("dead");
 			this.position.removeFighter(this);
 			this.setPosition(null);
 		}
