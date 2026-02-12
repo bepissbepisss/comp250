@@ -12,7 +12,7 @@ public class Monster extends Fighter{
 //	}
 
 	private int rageLevel = 0;
-	public static int BERSERK_THRESHOLD;
+	public static int BERSERK_THRESHOLD = 3;
 
 	// override take damage
 	public double takeDamage(double raw, int weapon) {
@@ -51,20 +51,18 @@ public class Monster extends Fighter{
 				// now go to the back of the troop.
 				currentTile.removeFighter(this);
 				currentTile.addFighter(this);
-			} else { //advance towards the castle if the next tile is not null
-				if (currentTile.towardTheCastle() != null) {
-					Tile nextTile = currentTile.towardTheCastle();
-					currentTile.removeFighter(this);
-					nextTile.addFighter(this);
+			} else if (currentTile.towardTheCastle() != null && currentTile.towardTheCastle().getWarrior() != null) { //advance towards the castle if the next tile is not null and has no warrior
+				Tile nextTile = currentTile.towardTheCastle();
+				currentTile.removeFighter(this);
+				nextTile.addFighter(this);
 
-					this.setPosition(nextTile);
-				}
-
+				this.setPosition(nextTile);
 			}
+
 		}
 		return 0;
-		
 	}
+
 
 	public boolean equals(Object o) {
 		if (!(o instanceof Monster)) {
