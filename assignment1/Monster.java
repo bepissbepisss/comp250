@@ -36,7 +36,7 @@ public class Monster extends Fighter{
 			rageLevel = 0;
 		}
 
-		for(; i>0; i--) {
+		for(int j = i; j>0; j--) {
 
 			// if there is a warrior on this tile
 			Tile currentTile = this.getPosition();

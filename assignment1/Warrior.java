@@ -22,7 +22,10 @@ public abstract class Warrior extends Fighter{
 	}
 
 	public double takeDamage(double raw, int weapon) {
-		double reducedRaw = raw * CASTLE_DMG_REDUCTION;
+		double reducedRaw = raw;
+		if (this.getPosition().isCastle()) {
+			reducedRaw = raw * CASTLE_DMG_REDUCTION;
+		}
 		return super.takeDamage(reducedRaw,weapon);
 	}
 
