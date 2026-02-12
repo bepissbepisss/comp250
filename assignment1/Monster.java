@@ -11,22 +11,48 @@ public class Monster extends Fighter{
 //		return super.toString();
 //	}
 
-	public int takeAction(){
-		// if there is a warrior on this tile
-		Tile currentTile = this.getPosition();
-		if (currentTile.getWarrior() != null) {
-			// do damage to warrior
-			currentTile.getWarrior().takeDamage(this.getAttackDamage(), this.getWeaponType());
-			// now go to the back of the troop.
-			currentTile.removeFighter(this);
-			currentTile.addFighter(this);
-		} else { //advance towards the castle
-			Tile nextTile = currentTile.towardTheCastle();
-			currentTile.removeFighter(this);
-			nextTile.addFighter(this);
+public int rageLevel = 0;
+	public static int BERSERK_THRESHOLD;
 
-			this.setPosition(nextTile);
-				
+	// override take damage
+	public double takeDamage(double raw, int weapon) {
+		double damage = super.takeDamage(raw, weapon);
+
+		int rageGain = this.getWeaponType()- weapon;
+		if (rageGain > 0 ) {
+			rageLevel += rageGain;
+			System.out.println("Rage increased to " + rageLevel);
+		}
+
+		
+		return damage;
+	}		
+
+	public int takeAction(){
+		// do two actions if enraged
+		int i = 1;
+		if (rageLevel > BERSERK_THRESHOLD) {
+			i = 2;
+			rageLevel = 0;
+		}
+		for(; i>0; i--) {
+
+			// if there is a warrior on this tile
+			Tile currentTile = this.getPosition();
+			if (currentTile.getWarrior() != null) {
+				// do damage to warrior
+				currentTile.getWarrior().takeDamage(this.getAttackDamage(), this.getWeaponType());
+				// now go to the back of the troop.
+				currentTile.removeFighter(this);
+				currentTile.addFighter(this);
+			} else { //advance towards the castle
+				Tile nextTile = currentTile.towardTheCastle();
+				currentTile.removeFighter(this);
+				nextTile.addFighter(this);
+
+				this.setPosition(nextTile);
+
+			}
 		}
 		return 0;
 		
@@ -52,6 +78,7 @@ public class Monster extends Fighter{
 	}
 
 	public Monster(Tile t, double hp, int wp, int ad) {
-		super(t,hp,wp,ad);	
+		super(t,hp,wp,ad);
+		rageLevel = 0;
 	}
 }

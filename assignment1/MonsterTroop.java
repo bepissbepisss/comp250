@@ -127,20 +127,24 @@ public class MonsterTroop {
 		t1 = new Tile(true,false,true,null,t2,null,new MonsterTroop()); //castle
 		System.out.println("Created all tiles");	
 
-		new Monster(t4, 1,11,10);
-		new Monster(t4, 1,11,10);
-		new Monster(t4, 1,11,10);
-		new Monster(t4, 1,11,10);
+		new Monster(t3, 1,11,10);
+		new Monster(t3, 1,11,10);
+		new Monster(t3, 1,11,10);
+		new Monster(t3, 1,11,10);
 
-		Lanceforged l = new Lanceforged(t3,3,4);
+		Lanceforged l = new Lanceforged(t2,3,4);
 
-		Monster[] t = t4.getMonsters();
+		Monster[] t = t3.getMonsters();
 		for (int i =0; i<t.length; i++) {
-			System.out.println("Monster " + (t.length-i) + " is at " +t[t.length-1-i]);
+			System.out.println("Monster " + (t.length-i) + " is at " +t[t.length-1-i] + " with rage level " + t[t.length-1-i].rageLevel);
 		}
-		l.takeAction();
+//		l.takeAction();
 
-		t = t4.getMonsters();
+		for (int i = 0; i<t.length; i++) {
+			t[i].takeAction();
+		}
+
+		t = t3.getMonsters();
 		for (int i =0; i<t.length; i++) {
 			System.out.println("Monster " + (t.length-i) + " is at " +t[t.length-1-i]);
 		}

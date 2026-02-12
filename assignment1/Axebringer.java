@@ -22,13 +22,18 @@ public class Axebringer extends Warrior {
 	public int takeAction(){
 		Tile currentTile = this.getPosition();
 		Tile nextTile = currentTile.towardTheCamp();
+		int skillPoints = 0;
+		int ad = this.getAttackDamage();
 		if (currentTile.getNumOfMonsters() != 0) {
-			currentTile.getMonster().takeDamage(this.getAttackDamage(), this.getWeaponType());
+			double damageDealt = currentTile.getMonster().takeDamage(this.getAttackDamage(), this.getWeaponType());
+		skillPoints = (int) (((double) ad) / damageDealt +1);
 		} else if (nextTile.getNumOfMonsters() != 0 && nextTile.isCamp() == false) {
-			nextTile.getMonster().takeDamage(this.getAttackDamage(), this.getWeaponType());
+			double damageDealt = nextTile.getMonster().takeDamage(this.getAttackDamage(), this.getWeaponType());
+		skillPoints = (int) (((double) ad) / damageDealt +1);
 		}
 
-		return 0;
+
+		return skillPoints;
 
 	}
 

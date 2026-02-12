@@ -18,24 +18,29 @@ public class Bladesworn extends Warrior{
 	}
 
 	public int takeAction() {
-		System.out.println("Looking for tiles");
+//		System.out.println("Looking for tiles");
 		Tile currentTile = this.getPosition();
 		Tile nextTile = currentTile.towardTheCamp();
-		System.out.println("Got tiles");
 		// check if the tile has a monster
+		int skillPoints = 0;
 		if (currentTile.getNumOfMonsters() != 0) {
-			System.out.println("There is a monster");
+//			System.out.println("There is a monster");
 			System.out.println(currentTile.getMonster());
-			currentTile.getMonster().takeDamage(this.getAttackDamage(), this.getWeaponType());
-			System.out.println("Monster took damage");
+			double damageDealt = currentTile.getMonster().takeDamage(this.getAttackDamage(), this.getWeaponType());
+//			System.out.println("Monster took damage");
+
+			int ad = this.getAttackDamage();
+
+			skillPoints = (int) (((double) ad) / damageDealt +1);
 
 		} else if (nextTile.getWarrior() == null && nextTile.isCamp() == false) {
-			System.out.println("No monster, moving up");
+//			System.out.println("No monster, moving up");
 			currentTile.removeFighter(this);
 			nextTile.addFighter(this);
 		}
+
 		
-		return 0;
+		return skillPoints;
 	}
 
 }

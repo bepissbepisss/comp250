@@ -14,27 +14,35 @@ public class Lanceforged extends Warrior{
 		actionRange = range;
 	}
 
-	private void dealPiercingDamage(Tile t) {
+	private int dealPiercingDamage(Tile t) {
 		int n;
 		if (piercingPower <= t.getNumOfMonsters()) {
 			n = piercingPower;
 		} else {
 			n = t.getNumOfMonsters();
 		}
-		System.out.println("n is " + n);
-
+//		System.out.println("n is " + n);
+		
+		// sum of skill points
+		int skillPoints = 0;
+		int ad = this.getAttackDamage();
+		double damageDealt;
+		
 		// damage n monsters from the back???
 		Monster[] mList = t.getMonsters();
 		// from the front. should hit n monsters
 		boolean killedMonster = false;
 		int initNumOfMonsters = t.getNumOfMonsters();
 		for(int i=initNumOfMonsters-1; i>initNumOfMonsters-1 - n; i--) {
-			System.out.println("Num of monst is " + t.getNumOfMonsters());
-			System.out.println("Hit a monster");
-			System.out.println("i is " + i);
+//			System.out.println("Num of monst is " + t.getNumOfMonsters());
+//			System.out.println("Hit a monster");
+//			System.out.println("i is " + i);
 			Monster m = mList[i];
-			m.takeDamage(this.getAttackDamage(), this.getWeaponType());
+			damageDealt = m.takeDamage(this.getAttackDamage(), this.getWeaponType());
+			skillPoints += (int) (((double) ad) / damageDealt +1);
 		}
+
+		return (int) skillPoints / n;
 	}	
 
 	public int takeAction() {
@@ -57,8 +65,8 @@ public class Lanceforged extends Warrior{
 			return 0;
 		}
 
-		dealPiercingDamage(nextTile);
-		return 0;
+		int skillPoints = dealPiercingDamage(nextTile);
+		return skillPoints;
 
 
 	}
