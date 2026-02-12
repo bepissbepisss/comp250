@@ -131,16 +131,16 @@ public class MonsterTroop {
 		new Monster(t3, 1,11,10);
 		new Monster(t3, 1,11,10);
 		new Monster(t3, 1,11,10);
-
 		Lanceforged l = new Lanceforged(t2,3,4);
 
 		Monster[] t = t3.getMonsters();
 		for (int i =0; i<t.length; i++) {
-			System.out.println("Monster " + (t.length-i) + " is at " +t[t.length-1-i] + " with rage level " + t[t.length-1-i].rageLevel);
+//			System.out.println("Monster " + (t.length-i) + " is at " +t[t.length-1-i] + " with rage level " + t[t.length-1-i].rageLevel);
 		}
 //		l.takeAction();
 
 		for (int i = 0; i<t.length; i++) {
+
 			t[i].takeAction();
 		}
 

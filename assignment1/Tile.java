@@ -60,17 +60,19 @@ public class Tile{
 
 	// not sure about these two
 	public Tile towardTheCastle(){
-		if (towardTheCastle.isOnThePath() == false || towardTheCastle.isCastle() == true) {
+		if (this.towardTheCastle == null) return null;
+		if (this.towardTheCastle.isOnThePath() == false || this.towardTheCastle.isCastle() == true) {
 			return null;
 		}
-		return towardTheCastle;
+		return this.towardTheCastle;
 	}
 
 	public Tile towardTheCamp(){
-		if (towardTheCamp.isOnThePath() == false || towardTheCamp.isCamp() == true) {
+		if (this.towardTheCamp == null) return null;
+		if (this.towardTheCamp.isOnThePath() == false || this.towardTheCamp.isCamp() == true) {
 			return null;
 		}
-		return towardTheCamp;
+		return this.towardTheCamp;
 	}
 
 	public void createPath(Tile ct, Tile cp) {

@@ -11,7 +11,7 @@ public class Monster extends Fighter{
 //		return super.toString();
 //	}
 
-public int rageLevel = 0;
+	private int rageLevel = 0;
 	public static int BERSERK_THRESHOLD;
 
 	// override take damage
@@ -35,22 +35,31 @@ public int rageLevel = 0;
 			i = 2;
 			rageLevel = 0;
 		}
+
 		for(; i>0; i--) {
 
 			// if there is a warrior on this tile
 			Tile currentTile = this.getPosition();
+			System.out.println(currentTile);
+			System.out.println(currentTile.towardTheCastle());
+
+			System.out.println("workin");
 			if (currentTile.getWarrior() != null) {
+
 				// do damage to warrior
 				currentTile.getWarrior().takeDamage(this.getAttackDamage(), this.getWeaponType());
+
 				// now go to the back of the troop.
 				currentTile.removeFighter(this);
 				currentTile.addFighter(this);
-			} else { //advance towards the castle
-				Tile nextTile = currentTile.towardTheCastle();
-				currentTile.removeFighter(this);
-				nextTile.addFighter(this);
+			} else { //advance towards the castle if the next tile is not null
+				if (currentTile.towardTheCastle() != null) {
+					Tile nextTile = currentTile.towardTheCastle();
+					currentTile.removeFighter(this);
+					nextTile.addFighter(this);
 
-				this.setPosition(nextTile);
+					this.setPosition(nextTile);
+				}
 
 			}
 		}
