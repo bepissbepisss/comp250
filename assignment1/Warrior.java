@@ -2,7 +2,7 @@
 
 package assignment1;
 
-abstract class Warrior extends Fighter{
+public abstract class Warrior extends Fighter{
 	private int requiredSkillPoints;
 	public static double CASTLE_DMG_REDUCTION;
 
@@ -14,6 +14,8 @@ abstract class Warrior extends Fighter{
 		super(t,hp,wp,ad);
 		requiredSkillPoints = sp;
 	}
+
+
 	
 	public int getTrainingCost() {
 		return requiredSkillPoints;
