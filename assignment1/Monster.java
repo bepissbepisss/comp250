@@ -18,7 +18,7 @@ public class Monster extends Fighter{
 	public double takeDamage(double raw, int weapon) {
 		double damage = super.takeDamage(raw, weapon);
 
-		int rageGain = this.getWeaponType()- weapon;
+		int rageGain = weapon - this.getWeaponType();
 		if (rageGain > 0 ) {
 			rageLevel += rageGain;
 			System.out.println("Rage increased to " + rageLevel);
@@ -37,7 +37,6 @@ public class Monster extends Fighter{
 		}
 
 		for(int j = i; j>0; j--) {
-
 			// if there is a warrior on this tile
 			Tile currentTile = this.getPosition();
 			System.out.println(currentTile);
