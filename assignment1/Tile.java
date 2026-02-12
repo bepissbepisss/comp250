@@ -29,6 +29,7 @@ public class Tile{
 	}	
 
 	public Tile(boolean castle, boolean camp, boolean path, Tile toCastle, Tile toCamp, Warrior w, MonsterTroop t){
+		System.out.println("Initializing tiles");
 		isCastle = castle;
 		isCamp = camp;
 		onThePath = path;
@@ -60,16 +61,14 @@ public class Tile{
 
 	// not sure about these two
 	public Tile towardTheCastle(){
-		if (this.towardTheCastle == null) return null;
-		if (this.towardTheCastle.isOnThePath() == false || this.towardTheCastle.isCastle() == true) {
+		if (this.isOnThePath() == false || this.isCastle() == true) {
 			return null;
 		}
 		return this.towardTheCastle;
 	}
 
 	public Tile towardTheCamp(){
-		if (this.towardTheCamp == null) return null;
-		if (this.towardTheCamp.isOnThePath() == false || this.towardTheCamp.isCamp() == true) {
+		if (this.isOnThePath() == false || this.isCamp() == true) {
 			return null;
 		}
 		return this.towardTheCamp;
