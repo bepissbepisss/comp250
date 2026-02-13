@@ -44,19 +44,22 @@ public class Monster extends Fighter{
 
 			System.out.println("workin");
 			if (currentTile.getWarrior() != null) {
-
+				System.out.println("Tile has a warrior");
 				// do damage to warrior
 				currentTile.getWarrior().takeDamage(this.getAttackDamage(), this.getWeaponType());
 
 				// now go to the back of the troop.
 				currentTile.removeFighter(this);
 				currentTile.addFighter(this);
-			} else if (currentTile.towardTheCastle() != null && currentTile.towardTheCastle().getWarrior() != null) { //advance towards the castle if the next tile is not null and has no warrior
+			} else if (currentTile.towardTheCastle() != null ) { //advance towards the castle if the next tile is not null and has no warrior
+				System.out.println("Tile has no warrior, move up");
 				Tile nextTile = currentTile.towardTheCastle();
 				currentTile.removeFighter(this);
 				nextTile.addFighter(this);
 
 				this.setPosition(nextTile);
+			} else {
+				System.out.println("Ran out of conditions");
 			}
 
 		}
