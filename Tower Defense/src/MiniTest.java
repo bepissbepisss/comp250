@@ -1429,9 +1429,12 @@ public class MiniTest {
 	void masteryTestLanceforgedTakeActionSameTile() {
 		runAndAssignCompetency(MiniTest.COMPETENCY.AM, () -> {
 			Tile tile = createTileOnPath();
+			System.out.println("Minitest nextTile is " + tile.towardTheCamp());
 			Lanceforged lanceforged = new Lanceforged(tile, 100, 1);
 			Monster monster = new Monster(tile, 100, 1, 10);
+			System.out.println("Does take action work?");
 			lanceforged.takeAction();
+			System.out.println("yes");
 			
 			// check if monster took damage
 			assertEquals(80, monster.getHealth(), "The Lanceforged should attack the Monster if it is on the same tile.");

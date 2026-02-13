@@ -48,10 +48,11 @@ public class Lanceforged extends Warrior{
 	public int takeAction() {
 		// look for nearest tile with a real troop
 		Tile currentTile = this.getPosition();
-		if (currentTile.towardTheCamp() == null) {
-		}
-		Tile nextTile = currentTile.towardTheCamp();
-		for (int i = 1; i<actionRange; i++) {
+		System.out.println("current tile is " + currentTile);
+		Tile nextTile = currentTile;
+		System.out.println("next tile is " + nextTile);
+		if (nextTile == null) return 0;
+		for (int i = 0; i<=actionRange; i++) {
 			if (nextTile == null) {
 				break;
 			}
