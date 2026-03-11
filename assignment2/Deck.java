@@ -207,6 +207,7 @@ public class Deck {
 		}
 		cards[numOfCards-1].next = cards[0];
 		cards[0].prev = cards[numOfCards-1];
+		head = cards[0];
 	}
 
 	/*
