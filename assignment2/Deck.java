@@ -10,7 +10,7 @@ public class Deck {
 	public Card head; // contains a pointer to the card on the top of the deck
 
 	public void main() {
-		Deck d = new Deck(13,4);
+		Deck d = new Deck(3,2);
 		Card c = d.head;
 		int i = 0;
 		while (i < 55) {
@@ -25,6 +25,13 @@ public class Deck {
 	 * TODO: Initializes a Deck object using the inputs provided
 	 */
 	public Deck(int numOfCardsPerSuit, int numOfSuits) {
+		if (numOfCardsPerSuit > 13 || numOfCardsPerSuit < 1) {
+			throw new IllegalArgumentException("Bad deck size");
+		}
+		if (numOfSuits < 1 || numOfSuits > 4) {
+			throw new IllegalArgumentException("Bad suit number");
+		}
+
 		Card prevCard = null;
 		Card nextCard = null;
 		String[] suits = {"C", "D", "H", "S"};
@@ -44,13 +51,10 @@ public class Deck {
 		Card rJoker = new Joker("red");
 		Card bJoker = new Joker("black");
 
-		if (numOfCardsPerSuit !=0) {
-			System.out.println("Not empty list");
-            assert nextCard != null;
-            nextCard.next = rJoker;
-		} else {
-			head = rJoker;
-		}
+
+		assert nextCard != null;
+		nextCard.next = rJoker;
+
 		rJoker.prev = nextCard;
 		rJoker.next = bJoker;
 		bJoker.prev=rJoker;
