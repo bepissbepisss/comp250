@@ -10,7 +10,8 @@ public class Deck {
 	public Card head; // contains a pointer to the card on the top of the deck
 
 	public void main() {
-		Deck d = new Deck(10,1);
+		int num = 1;
+		Deck d = new Deck(num,1);
 		Card c = d.head;
 		System.out.println("Value of " + c + " is " + c.getValue());
 		while (true) {
@@ -23,7 +24,9 @@ public class Deck {
 
 		Deck copy = new Deck(d);
 		c = copy.head;
-		int i = 15;
+		int i = num+5;
+		Card B = new PlayingCard("D",1);
+		copy.addCard(B);
 		while (i!=0) {
 			i--;
 			System.out.println(c);
@@ -80,35 +83,54 @@ public class Deck {
 	 */
 	public Deck(Deck d) {
 		Card deckCard = d.head;
+		if (d.head == null) {
+			numOfCards = 0;
+			head = null;
+			return;
+		}
 		Card prevCard = null;
-		Card nextCard = deckCard;
+		Card nextCard = deckCard.getCopy();
 		head = nextCard;
 
 		int num = 1;
 
 		boolean firstTime = true;
+		boolean firstIteration = true;
 		while (true) {
+
 			num++;
-			nextCard = deckCard.getCopy();
+			if (!firstIteration) {
+				nextCard = deckCard.getCopy();
+			}
+			firstIteration = false;
 			//System.out.println("Copying card: " + nextCard);
 			if (prevCard != null) {
+				//System.out.println("PrevCard is good, linking");
 				prevCard.next = nextCard;
+				//System.out.println(prevCard + " -> " + nextCard);
 				nextCard.prev = prevCard;
-				if (prevCard.toString().equals("AC")) {
-					if (firstTime) {
-						//System.out.println("Found an ace of clubs, first time");
-						firstTime = false;
-					} else {
-						//System.out.println("Found an ace of clubs, breaking");
-						numOfCards = num-3;
-						break;
-					}
-				}
 			}
+			if (nextCard.toString().equals("AC")) {
+				if (firstTime) {
+					//System.out.println("Found an ace of clubs, first time");
+					firstTime = false;
+				} else {
+					//System.out.println("Found an ace of clubs, breaking");
+					prevCard.next = head;
+					head.prev = prevCard;
+					//System.out.println(prevCard + " -> " + head);
+					numOfCards = num-2;
+					break;
+				}
+			} else {
 
+			}
 
 			prevCard = nextCard;
 			deckCard = deckCard.next;
+
+
+
 		}
 	}
 
@@ -122,7 +144,22 @@ public class Deck {
 	 * method runs in $O(1)$.
 	 */
 	public void addCard(Card c) {
-		/**** ADD CODE HERE ****/
+		if (head == null) {
+			numOfCards = 1;
+			head = c;
+			head.next = head;
+			head.prev = head;
+		} else {
+			Card lastCard = head.prev;
+
+			head.prev = c;
+			lastCard.next = c;
+
+			c.next = head;
+			c.prev = lastCard;
+
+			numOfCards++;
+		}
 	}
 
 	/*
