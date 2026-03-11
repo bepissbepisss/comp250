@@ -13,7 +13,7 @@ public class Deck {
 		Deck d = new Deck(13,4);
 		Card c = d.head;
 		int i = 0;
-		while (i < 54) {
+		while (i < 55) {
 			i++;
 			System.out.println(c);
 			c = c.next;
@@ -41,8 +41,20 @@ public class Deck {
 				prevCard=nextCard;
 			}
 		}
-		head.prev = nextCard;
-		nextCard.next = head;
+		Card rJoker = new Joker("red");
+		Card bJoker = new Joker("black");
+
+		if (numOfCardsPerSuit !=0) {
+			System.out.println("Not empty list");
+            assert nextCard != null;
+            nextCard.next = rJoker;
+		} else {
+			head = rJoker;
+		}
+		rJoker.prev = nextCard;
+		rJoker.next = bJoker;
+		bJoker.prev=rJoker;
+		bJoker.next = head;
 	}
 
 	/*
