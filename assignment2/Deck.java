@@ -9,14 +9,42 @@ public class Deck {
 	public int numOfCards; // contains the total number of cards in the deck
 	public Card head; // contains a pointer to the card on the top of the deck
 
+	public void main() {
+		Deck d = new Deck(13,4);
+		Card c = d.head;
+		int i = 0;
+		while (c!=null) {
+			i++;
+			System.out.println(c);
+			c = c.next;
+		}
+		System.out.println("There are " + i + " cards");
+	}
+
 	/* 
 	 * TODO: Initializes a Deck object using the inputs provided
 	 */
 	public Deck(int numOfCardsPerSuit, int numOfSuits) {
-		/**** ADD CODE HERE ****/
+		Card prevCard = null;
+		Card nextCard = null;
+		String[] suits = {"C", "D", "H", "S"};
+		for (int i=0; i<numOfSuits; i++) {
+			for (int j=0; j<numOfCardsPerSuit;j++) {
+				nextCard = new PlayingCard(suits[i], j+1);
+				if (prevCard!=null) {
+					prevCard.next = nextCard;
+					nextCard.prev = prevCard;
+				}
+				if (i == 0 && j==0) {
+					head = nextCard;
+				}
+				prevCard=nextCard;
+				nextCard = null;
+			}
+		}
 	}
 
-	/* 
+	/*
 	 * TODO: Implements a copy constructor for Deck using Card.getCopy().
 	 * This method runs in O(n), where n is the number of cards in d.
 	 */
@@ -29,27 +57,27 @@ public class Deck {
 	 */
 	public Deck() {}
 
-	/* 
-	 * TODO: Adds the specified card at the bottom of the deck. This 
-	 * method runs in $O(1)$. 
+	/*
+	 * TODO: Adds the specified card at the bottom of the deck. This
+	 * method runs in $O(1)$.
 	 */
 	public void addCard(Card c) {
 		/**** ADD CODE HERE ****/
 	}
 
 	/*
-	 * TODO: Shuffles the deck using the algorithm described in the pdf. 
-	 * This method runs in O(n) and uses O(n) space, where n is the total 
+	 * TODO: Shuffles the deck using the algorithm described in the pdf.
+	 * This method runs in O(n) and uses O(n) space, where n is the total
 	 * number of cards in the deck.
 	 */
 	public void shuffle() {
-		/**** ADD CODE HERE ****/ 
+		/**** ADD CODE HERE ****/
 	}
 
 	/*
-	 * TODO: Returns a reference to the joker with the specified color in 
-	 * the deck. This method runs in O(n), where n is the total number of 
-	 * cards in the deck. 
+	 * TODO: Returns a reference to the joker with the specified color in
+	 * the deck. This method runs in O(n), where n is the total number of
+	 * cards in the deck.
 	 */
 	public Joker locateJoker(String color) {
 		/**** ADD CODE HERE ****/
@@ -57,7 +85,7 @@ public class Deck {
 	}
 
 	/*
-	 * TODO: Moved the specified Card, p positions down the deck. You can 
+	 * TODO: Moved the specified Card, p positions down the deck. You can
 	 * assume that the input Card does belong to the deck (hence the deck is
 	 * not empty). This method runs in O(p).
 	 */
@@ -66,8 +94,8 @@ public class Deck {
 	}
 
 	/*
-	 * TODO: Performs a triple cut on the deck using the two input cards. You 
-	 * can assume that the input cards belong to the deck and the first one is 
+	 * TODO: Performs a triple cut on the deck using the two input cards. You
+	 * can assume that the input cards belong to the deck and the first one is
 	 * nearest to the top of the deck. This method runs in O(1)
 	 */
 	public void tripleCut(Card firstCard, Card secondCard) {
@@ -75,8 +103,8 @@ public class Deck {
 	}
 
 	/*
-	 * TODO: Performs a count cut on the deck. Note that if the value of the 
-	 * bottom card is equal to a multiple of the number of cards in the deck, 
+	 * TODO: Performs a count cut on the deck. Note that if the value of the
+	 * bottom card is equal to a multiple of the number of cards in the deck,
 	 * then the method should not do anything. This method runs in O(n).
 	 */
 	public void countCut() {
@@ -84,8 +112,8 @@ public class Deck {
 	}
 
 	/*
-	 * TODO: Returns the card that can be found by looking at the value of the 
-	 * card on the top of the deck, and counting down that many cards. If the 
+	 * TODO: Returns the card that can be found by looking at the value of the
+	 * card on the top of the deck, and counting down that many cards. If the
 	 * card found is a Joker, then the method returns null, otherwise it returns
 	 * the Card found. This method runs in O(n).
 	 */
@@ -95,7 +123,7 @@ public class Deck {
 	}
 
 	/*
-	 * TODO: Uses the Solitaire algorithm to generate one value for the keystream 
+	 * TODO: Uses the Solitaire algorithm to generate one value for the keystream
 	 * using this deck. This method runs in O(n).
 	 */
 	public int generateNextKeystreamValue() {
