@@ -92,6 +92,8 @@ public class Deck {
 		Card nextCard = deckCard.getCopy();
 		head = nextCard;
 
+		String firstCard = nextCard.toString();
+
 		int num = 1;
 
 		boolean firstTime = true;
@@ -110,7 +112,7 @@ public class Deck {
 				//System.out.println(prevCard + " -> " + nextCard);
 				nextCard.prev = prevCard;
 			}
-			if (nextCard.toString().equals("AC")) {
+			if (nextCard.toString().equals(firstCard)) {
 				if (firstTime) {
 					//System.out.println("Found an ace of clubs, first time");
 					firstTime = false;
@@ -122,8 +124,6 @@ public class Deck {
 					numOfCards = num-2;
 					break;
 				}
-			} else {
-
 			}
 
 			prevCard = nextCard;
