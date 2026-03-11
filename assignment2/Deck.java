@@ -10,16 +10,29 @@ public class Deck {
 	public Card head; // contains a pointer to the card on the top of the deck
 
 	public void main() {
-		int num = 1;
-		Deck d = new Deck(num,1);
+		int num = 3;
+		int suits = 1;
+		Deck d = new Deck(num,suits);
 		Card c = d.head;
 		System.out.println("Value of " + c + " is " + c.getValue());
-		while (true) {
+		int i = num*suits+2;
+		while (i >=0) {
+			i--;
 			System.out.println(c);
-			if (c.toString().equals("BJ")) break;
+			c = c.next;
+		}
+		System.out.println("----");
+		d.gen.setSeed(10);
+		d.shuffle();
+		i = num*suits+2;
+		while (i >=0) {
+			i--;
+			System.out.println(c);
 			c = c.next;
 		}
 		System.out.println("There are " + d.numOfCards + " cards");
+
+		/*
 		System.out.println("---");
 
 		Deck copy = new Deck(d);
@@ -34,6 +47,8 @@ public class Deck {
 			c = c.next;
 		}
 		System.out.println("There are " + copy.numOfCards + " cards");
+
+		 */
 	}
 
 	/* 
@@ -168,7 +183,30 @@ public class Deck {
 	 * number of cards in the deck.
 	 */
 	public void shuffle() {
-		/**** ADD CODE HERE ****/
+		if (numOfCards == 0) return;
+		Card[] cards = new Card[numOfCards];
+		Card c = head;
+		for(int i =0; i<numOfCards;i++){
+			cards[i] =c;
+			c = c.next;
+		}
+		//shuffle
+		for(int i = numOfCards-1; i>=1; i--) {
+			int j = gen.nextInt(i+1);
+			Card temp = cards[j].getCopy();
+			cards[j] = cards[i].getCopy();
+			cards[i] = temp.getCopy();
+		}
+
+		//rebuild linked list
+		Card prevCard = null;
+		Card nextCard = null;
+		for(int i =0; i<numOfCards-1; i++) {
+			cards[i].next = cards[i+1];
+			cards[i+1].prev = cards[i];
+		}
+		cards[numOfCards-1].next = cards[0];
+		cards[0].prev = cards[numOfCards-1];
 	}
 
 	/*
