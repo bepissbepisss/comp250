@@ -13,7 +13,7 @@ public class Deck {
 		Deck d = new Deck(13,4);
 		Card c = d.head;
 		int i = 0;
-		while (c!=null) {
+		while (i < 54) {
 			i++;
 			System.out.println(c);
 			c = c.next;
@@ -39,9 +39,10 @@ public class Deck {
 					head = nextCard;
 				}
 				prevCard=nextCard;
-				nextCard = null;
 			}
 		}
+		head.prev = nextCard;
+		nextCard.next = head;
 	}
 
 	/*
