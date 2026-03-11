@@ -216,7 +216,17 @@ public class Deck {
 	 * cards in the deck.
 	 */
 	public Joker locateJoker(String color) {
-		/**** ADD CODE HERE ****/
+		if (numOfCards ==0) return null;
+		Card j = new Joker(color);
+		Card c = head;
+		String firstCard = c.toString();
+		if (c.toString().equals(j.toString())) return (Joker) c;
+		c = c.next;
+		while (!c.toString().equals(firstCard)) {
+			if (c.toString().equals(j.toString())) return (Joker) c;
+			c = c.next;
+		}
+
 		return null;
 	}
 
