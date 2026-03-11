@@ -10,15 +10,27 @@ public class Deck {
 	public Card head; // contains a pointer to the card on the top of the deck
 
 	public void main() {
-		Deck d = new Deck(3,2);
+		Deck d = new Deck(10,1);
 		Card c = d.head;
-		int i = 0;
-		while (i < 55) {
-			i++;
+		System.out.println("Value of " + c + " is " + c.getValue());
+		while (true) {
 			System.out.println(c);
+			if (c.toString().equals("BJ")) break;
 			c = c.next;
 		}
-		System.out.println("There are " + i + " cards");
+		System.out.println("There are " + d.numOfCards + " cards");
+		System.out.println("---");
+
+		Deck copy = new Deck(d);
+		c = copy.head;
+		int i = 15;
+		while (i!=0) {
+			i--;
+			System.out.println(c);
+			//if (c.toString().equals("BJ")) break;
+			c = c.next;
+		}
+		System.out.println("There are " + copy.numOfCards + " cards");
 	}
 
 	/* 
@@ -31,6 +43,7 @@ public class Deck {
 		if (numOfSuits < 1 || numOfSuits > 4) {
 			throw new IllegalArgumentException("Bad suit number");
 		}
+		numOfCards = numOfCardsPerSuit * numOfSuits +2;
 
 		Card prevCard = null;
 		Card nextCard = null;
@@ -66,7 +79,37 @@ public class Deck {
 	 * This method runs in O(n), where n is the number of cards in d.
 	 */
 	public Deck(Deck d) {
-		/**** ADD CODE HERE ****/
+		Card deckCard = d.head;
+		Card prevCard = null;
+		Card nextCard = deckCard;
+		head = nextCard;
+
+		int num = 1;
+
+		boolean firstTime = true;
+		while (true) {
+			num++;
+			nextCard = deckCard.getCopy();
+			//System.out.println("Copying card: " + nextCard);
+			if (prevCard != null) {
+				prevCard.next = nextCard;
+				nextCard.prev = prevCard;
+				if (prevCard.toString().equals("AC")) {
+					if (firstTime) {
+						//System.out.println("Found an ace of clubs, first time");
+						firstTime = false;
+					} else {
+						//System.out.println("Found an ace of clubs, breaking");
+						numOfCards = num-3;
+						break;
+					}
+				}
+			}
+
+
+			prevCard = nextCard;
+			deckCard = deckCard.next;
+		}
 	}
 
 	/*
