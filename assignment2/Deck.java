@@ -10,28 +10,26 @@ public class Deck {
 	public Card head; // contains a pointer to the card on the top of the deck
 
 	public void main() {
-		int num = 3;
+		int num = 4;
 		int suits = 1;
 		Deck d = new Deck(num,suits);
 		Card c = d.head;
 		System.out.println("Value of " + c + " is " + c.getValue());
 		int i = num*suits+2;
-		while (i >=0) {
+		while (i >0) {
 			i--;
 			System.out.println(c);
 			c = c.next;
 		}
 		System.out.println("----");
-		d.gen.setSeed(10);
-		d.shuffle();
+		Card b = new PlayingCard("C",2);
+		d.moveCard(b,3);
 		i = num*suits+2;
-		while (i >=0) {
+		while (i >0) {
 			i--;
 			System.out.println(c);
 			c = c.next;
 		}
-		System.out.println("There are " + d.numOfCards + " cards");
-
 		/*
 		System.out.println("---");
 
@@ -236,7 +234,32 @@ public class Deck {
 	 * not empty). This method runs in O(p).
 	 */
 	public void moveCard(Card c, int p) {
-		/**** ADD CODE HERE ****/
+		// find card
+		Card b = head;
+		while(!c.toString().equals(b.toString())) {
+			b = b.next;
+		}
+		Card B = b;
+		Card A;
+		Card C;
+		Card D;
+		System.out.println("Found b: " + b);
+		for (int i = 0; i<p; i++){
+			A = B.prev;
+			C = B.next;
+			D = C.next;
+			System.out.println("Series went from " + A + " " + B + " " + C +" "+ D);
+
+			A.next = C;
+			C.prev = A;
+			C.next = B;
+			B.prev = C;
+			B.next = D;
+			D.prev = B;
+			System.out.println("Series went to:  " + B.prev.prev + " " + B.prev + " " + B +" "+ B.next);
+			System.out.println("------");
+		}
+
 	}
 
 	/*
