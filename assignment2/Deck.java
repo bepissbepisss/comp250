@@ -360,7 +360,7 @@ public class Deck {
 		System.out.println("Count cut looking at " + head.prev + " with value " + head.prev.getValue());
 		int val = head.prev.getValue() % numOfCards;
 		System.out.println("Count cut value is " + val);
-		if (val == 0 || val == numOfCards -1 || val == numOfCards -2) {
+		if (val == 0 || val == numOfCards -1) {
 			System.out.println("Count cut do nothing");
 			return;
 		}
@@ -368,7 +368,7 @@ public class Deck {
 		Card T = head.prev;
 		Card B = T.prev;
 		Card F = head;
-		for(int i = 0; i < val; i++) {
+		for(int i = 1; i < val; i++) {
 			F = F.next;
 		}
 		Card A = F.next;
@@ -470,6 +470,7 @@ public class Deck {
 
 		Card d = lookUpCard();
 		if (d == null) return generateNextKeystreamValue();
+		System.out.println("Succesfully generated " + d.getValue());
 		return d.getValue();
 
 	}
