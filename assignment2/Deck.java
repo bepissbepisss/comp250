@@ -13,23 +13,16 @@ public class Deck {
 		int num = 4;
 		int suits = 1;
 		Deck d = new Deck(num,suits);
+		int i = num*suits+5;
+		d.printDeck();
+		d.shuffle();
 		Card c = d.head;
-		System.out.println("Value of " + c + " is " + c.getValue());
-		int i = num*suits+2;
-		while (i >0) {
-			i--;
-			System.out.println(c);
-			c = c.next;
-		}
 
-		System.out.println("val of bj is " + d.head.prev.getValue());
 
+		System.out.println("Next Keystream is " + d.generateNextKeystreamValue());
 		/*
 		System.out.println("---");
-		//d.moveCard(new Joker("black"),1);
-		System.out.println("d.head.prev is " + d.head.prev);
-		d.head = d.head.prev;
-		d.moveCard(new Joker("red"),5);
+		d.moveCard(new Joker("black"),1);
 		c = d.head;
 		i = num*suits+2;
 		while (i >0) {
@@ -94,7 +87,7 @@ public class Deck {
 
 		Card prevCard = null;
 		Card nextCard = null;
-		String[] suits = {"C", "D", "H", "S"};
+		String[] suits = suitsInOrder;
 		for (int i=0; i<numOfSuits; i++) {
 			for (int j=0; j<numOfCardsPerSuit;j++) {
 				nextCard = new PlayingCard(suits[i], j+1);
@@ -364,8 +357,13 @@ public class Deck {
 	 * then the method should not do anything. This method runs in O(n).
 	 */
 	public void countCut() {
-		int val = head.prev.getValue();
-		if (val == numOfCards -1) return;
+		System.out.println("Count cut looking at " + head.prev + " with value " + head.prev.getValue());
+		int val = head.prev.getValue() % numOfCards;
+		System.out.println("Count cut value is " + val);
+		if (val == 0 || val == numOfCards -1 || val == numOfCards -2) {
+			System.out.println("Count cut do nothing");
+			return;
+		}
 		Card H = head;
 		Card T = head.prev;
 		Card B = T.prev;
@@ -397,6 +395,7 @@ public class Deck {
 	public Card lookUpCard() {
 		int val = head.getValue();
 		Card c = head;
+
 		for (int i =0; i<val; i++) {
 			c = c.next;
 		}
@@ -412,9 +411,67 @@ public class Deck {
 	 * TODO: Uses the Solitaire algorithm to generate one value for the keystream
 	 * using this deck. This method runs in O(n).
 	 */
+
+	private void printDeck() {
+		Card c = head;
+		System.out.println("---");
+		int n = numOfCards;
+		while (n>0) {
+			System.out.print(c + " ");
+			c = c.next;
+			n--;
+		}
+		System.out.println("");
+		System.out.println("---");
+	}
+
 	public int generateNextKeystreamValue() {
-		/**** ADD CODE HERE ****/
-		return 0;
+		System.out.println("Initial deck");
+		printDeck();
+		Card RJ = locateJoker("red");
+		moveCard(RJ, 1);
+		System.out.println("Moved RJ");
+		printDeck();
+
+		Card BJ = locateJoker("black");
+		moveCard(BJ,2);
+		System.out.println("Moved BJ");
+		printDeck();
+
+
+		// find which joker comes first
+		Card c = head;
+		Card first = null;
+		Card second = null;
+		while(true) {
+			if (c == RJ) {
+				first = RJ;
+				second = BJ;
+				break;
+			} else if (c == BJ) {
+				first = BJ;
+				second = RJ;
+				break;
+			}
+			c = c.next;
+		}
+		//System.out.println("Found a joker that comes first");
+
+		// triple cut
+		// passing first then second is correct
+		// don't need to do first.prev and second.next
+		tripleCut(first,second);
+		System.out.println("After triple cut");
+		printDeck();
+		countCut();
+		System.out.println("After count cut");
+		printDeck();
+
+
+		Card d = lookUpCard();
+		if (d == null) return generateNextKeystreamValue();
+		return d.getValue();
+
 	}
 
 
