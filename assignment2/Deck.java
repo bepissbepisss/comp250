@@ -21,15 +21,38 @@ public class Deck {
 			System.out.println(c);
 			c = c.next;
 		}
-		System.out.println("----");
-		Card b = new PlayingCard("C",2);
-		d.moveCard(b,3);
+		System.out.println("---");
+		d.moveCard(new Joker("black"),1);
+		d.moveCard(new Joker("red"),4);
+		c = d.head;
 		i = num*suits+2;
 		while (i >0) {
 			i--;
 			System.out.println(c);
 			c = c.next;
 		}
+		System.out.println("---");
+		d.tripleCut(d.locateJoker("black"),d.locateJoker("red"));
+		c = d.head;
+		i = num*suits+2;
+		while (i >0) {
+			i--;
+			System.out.println(c);
+			c = c.next;
+		}
+
+
+
+
+//		System.out.println("----");
+//		Card b = new PlayingCard("C",2);
+//		d.moveCard(b,3);
+//		i = num*suits+2;
+//		while (i >0) {
+//			i--;
+//			System.out.println(c);
+//			c = c.next;
+//		}
 		/*
 		System.out.println("---");
 
@@ -243,12 +266,12 @@ public class Deck {
 		Card A;
 		Card C;
 		Card D;
-		System.out.println("Found b: " + b);
+		//System.out.println("Found b: " + b);
 		for (int i = 0; i<p; i++){
 			A = B.prev;
 			C = B.next;
 			D = C.next;
-			System.out.println("Series went from " + A + " " + B + " " + C +" "+ D);
+			//System.out.println("Series went from " + A + " " + B + " " + C +" "+ D);
 
 			A.next = C;
 			C.prev = A;
@@ -256,8 +279,8 @@ public class Deck {
 			B.prev = C;
 			B.next = D;
 			D.prev = B;
-			System.out.println("Series went to:  " + B.prev.prev + " " + B.prev + " " + B +" "+ B.next);
-			System.out.println("------");
+			//System.out.println("Series went to:  " + B.prev.prev + " " + B.prev + " " + B +" "+ B.next);
+			//System.out.println("------");
 		}
 
 	}
@@ -268,7 +291,30 @@ public class Deck {
 	 * nearest to the top of the deck. This method runs in O(1)
 	 */
 	public void tripleCut(Card firstCard, Card secondCard) {
-		/**** ADD CODE HERE ****/
+		Card A = firstCard;
+		Card B = secondCard;
+		Card H = head;
+		Card C = A.prev;
+		Card D = B.next;
+		Card E = head.prev;
+
+		
+		// update second joker
+		B.next = H;
+		H.prev = B;
+		System.out.println("Card " + B + " points to " + B.next);
+
+		// update first joker
+		A.prev = E;
+		E.next = A;
+		System.out.println("Card " + E + " points to " + E.next);
+
+		// update head
+		D.prev = C;
+		C.next = D;
+		System.out.println("Card " + C + " points to " + C.next);
+		head = D;
+
 	}
 
 	/*
