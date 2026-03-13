@@ -21,6 +21,10 @@ public class Deck {
 			System.out.println(c);
 			c = c.next;
 		}
+
+		System.out.println("val of bj is " + d.head.prev.getValue());
+
+		/*
 		System.out.println("---");
 		//d.moveCard(new Joker("black"),1);
 		System.out.println("d.head.prev is " + d.head.prev);
@@ -42,6 +46,8 @@ public class Deck {
 			System.out.println(c);
 			c = c.next;
 		}
+
+		 */
 
 
 
@@ -358,7 +364,28 @@ public class Deck {
 	 * then the method should not do anything. This method runs in O(n).
 	 */
 	public void countCut() {
-		/**** ADD CODE HERE ****/
+		int val = head.prev.getValue();
+		if (val == numOfCards -1) return;
+		Card H = head;
+		Card T = head.prev;
+		Card B = T.prev;
+		Card F = head;
+		for(int i = 0; i < val; i++) {
+			F = F.next;
+		}
+		Card A = F.next;
+
+		// rearrange
+		A.prev = T;
+		T.next = A;
+
+		B.next = H;
+		H.prev = B;
+
+		F.next = T;
+		T.prev = F;
+
+		head = A;
 	}
 
 	/*
