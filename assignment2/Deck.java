@@ -395,8 +395,17 @@ public class Deck {
 	 * the Card found. This method runs in O(n).
 	 */
 	public Card lookUpCard() {
-		/**** ADD CODE HERE ****/
-		return null;
+		int val = head.getValue();
+		Card c = head;
+		for (int i =0; i<val; i++) {
+			c = c.next;
+		}
+
+		if (c instanceof Joker) {
+			return null;
+		} else {
+			return c;
+		}
 	}
 
 	/*
