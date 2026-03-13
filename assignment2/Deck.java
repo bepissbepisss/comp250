@@ -22,7 +22,9 @@ public class Deck {
 			c = c.next;
 		}
 		System.out.println("---");
-		d.moveCard(new Joker("black"),1);
+		//d.moveCard(new Joker("black"),1);
+		System.out.println("d.head.prev is " + d.head.prev);
+		d.head = d.head.prev;
 		d.moveCard(new Joker("red"),4);
 		c = d.head;
 		i = num*suits+2;
@@ -111,6 +113,7 @@ public class Deck {
 		rJoker.next = bJoker;
 		bJoker.prev=rJoker;
 		bJoker.next = head;
+		head.prev = bJoker;
 	}
 
 	/*
@@ -293,27 +296,56 @@ public class Deck {
 	public void tripleCut(Card firstCard, Card secondCard) {
 		Card A = firstCard;
 		Card B = secondCard;
-		Card H = head;
-		Card C = A.prev;
-		Card D = B.next;
-		Card E = head.prev;
+		Card C = null;
+		Card D = null;
+		Card H = null;
+		Card E = null;
+		Card lastCard = head.prev;
+		if (firstCard != head) {
+			H = head;
+			C = A.prev;
+		}
+		if (secondCard != lastCard) {
+			D = B.next;
+			E = head.prev;
+		}
 
-		
 		// update second joker
-		B.next = H;
-		H.prev = B;
-		System.out.println("Card " + B + " points to " + B.next);
+		if (firstCard!=head) {
+			B.next = H;
+			H.prev = B;
+		} else {
+			B.next = D;
+			D.prev = B;
+		}
+
+		//System.out.println("Card " + B + " points to " + B.next);
 
 		// update first joker
-		A.prev = E;
-		E.next = A;
-		System.out.println("Card " + E + " points to " + E.next);
+		if (secondCard != lastCard) {
+			A.prev = E;
+			E.next = A;
+		}  else {
+			A.prev = C;
+			C.next = A;
+		}
+		//System.out.println("Card " + E + " points to " + E.next);
 
 		// update head
-		D.prev = C;
-		C.next = D;
-		System.out.println("Card " + C + " points to " + C.next);
-		head = D;
+		if (firstCard!=head && secondCard != lastCard) {
+			D.prev = C;
+			C.next = D;
+			head = D;
+		} else if (secondCard == lastCard) {
+			head = A;
+		} else if (firstCard == head) {
+			head = D;
+		}
+
+
+
+
+
 
 	}
 
