@@ -62,8 +62,21 @@ public class SolitaireCipher {
 	 * TODO: Decodes the input message using the algorithm described in the pdf.
 	 */
 	public String decode(String msg) {
-		/**** ADD CODE HERE ****/
-		return null;
+		int[] nums = getKeystream(msg.length());
+		char a;
+		String trueMsg = "";
+		for(int i = 0; i<msg.length();i++) {
+			a = msg.charAt(i);
+			System.out.print("Letter" + a +" minus " + nums[i] + " gives ");
+			a -= nums[i] % 26;
+			while (!(a >= 'A' && a <= 'Z')) {
+				a += 26;
+			}
+			trueMsg += a;
+			System.out.println(a);
+		}
+
+		return trueMsg;
 	}
 
 }
