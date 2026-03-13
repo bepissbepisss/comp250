@@ -25,7 +25,7 @@ public class Deck {
 		//d.moveCard(new Joker("black"),1);
 		System.out.println("d.head.prev is " + d.head.prev);
 		d.head = d.head.prev;
-		d.moveCard(new Joker("red"),4);
+		d.moveCard(new Joker("red"),5);
 		c = d.head;
 		i = num*suits+2;
 		while (i >0) {
@@ -301,6 +301,9 @@ public class Deck {
 		Card H = null;
 		Card E = null;
 		Card lastCard = head.prev;
+
+		if (secondCard == lastCard && firstCard == head) return;
+
 		if (firstCard != head) {
 			H = head;
 			C = A.prev;
